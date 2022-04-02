@@ -1,19 +1,27 @@
-import java.io.IOException;
-import java.util.Date;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-public class HelloServlet extends HttpServlet{
-    public void doGet(HttpServletRequest request, HttpServletResponse response){
-        
-        try {
-            response.getWriter().println("<h1>Hello Servlet!</h1>");
-            response.getWriter().println(new Date().toLocaleString());
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+import java.io.IOException;
+import java.io.PrintWriter;
+ 
+public class HelloServlet extends HttpServlet {
+ 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/json;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        String res ="{\"hello\":\"world\",\"hi\":\"I`m a embd tomcat\"}";
+        out.println(res);
+        out.flush();
+        out.close();
     }
+ 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
+    }
+ 
 }
